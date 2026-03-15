@@ -231,6 +231,15 @@
 		.chain-copy-btn.copied {
 			background: #00c853;
 		}
+
+		.chain-clear-btn {
+			background: #303032;
+			color: #efeff1;
+		}
+
+		.chain-clear-btn:hover {
+			background: #53535f;
+		}
 	</style>
 </head>
 <body>
@@ -253,6 +262,7 @@
 				Chain Copy
 			</label>
 			<button class="chain-copy-btn" id="chainCopyBtn">Copy</button>
+			<button class="chain-copy-btn chain-clear-btn" id="chainClearBtn">Clear</button>
 		</div>
 
 		<input type="text" class="search" placeholder="Search commands..." id="search">
@@ -490,7 +500,7 @@
 		</div>
 
 		<footer>
-			Updated 2026-03-15 18:16:47 UTC
+			Updated 2026-03-15 18:32:13 UTC
 		</footer>
 	</div>
 
@@ -507,6 +517,7 @@
 		const MAX_CHAIN = 5;
 		const chainToggle = document.getElementById('chainToggle');
 		const chainCopyBtn = document.getElementById('chainCopyBtn');
+		const chainClearBtn = document.getElementById('chainClearBtn');
 
 		chainToggle.addEventListener('change', function() {
 			chainMode = this.checked;
@@ -514,6 +525,8 @@
 				clearChain();
 			}
 		});
+
+		chainClearBtn.addEventListener('click', clearChain);
 
 		chainCopyBtn.addEventListener('click', function() {
 			const text = chainSelected.map(btn => btn.textContent).join(' ');
@@ -543,7 +556,9 @@
 		}
 
 		function updateChainCopyBtn() {
-			chainCopyBtn.classList.toggle('visible', chainSelected.length > 0);
+			const hasSelection = chainSelected.length > 0;
+			chainCopyBtn.classList.toggle('visible', hasSelection);
+			chainClearBtn.classList.toggle('visible', hasSelection);
 		}
 
 		function copy(btn) {
