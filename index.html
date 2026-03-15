@@ -5,6 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>aionjanis - Voice Commands</title>
 	<style>
+
 		* { margin: 0; padding: 0; box-sizing: border-box; }
 
 		body {
@@ -41,11 +42,50 @@
 			font-weight: 600;
 		}
 
+		nav {
+			display: flex;
+			justify-content: center;
+			gap: 0.5rem;
+			margin-bottom: 2rem;
+			flex-wrap: wrap;
+		}
+
+		.nav-link {
+			display: inline-block;
+			padding: 0.5rem 1rem;
+			background: #1f1f23;
+			border: 1px solid #303032;
+			border-radius: 6px;
+			color: #adadb8;
+			text-decoration: none;
+			font-size: 0.9rem;
+			transition: border-color 0.15s, background 0.15s;
+		}
+
+		.nav-link:hover {
+			border-color: #bf94ff;
+			background: #26262c;
+			color: #efeff1;
+		}
+
+		.nav-link.active {
+			border-color: #bf94ff;
+			background: #bf94ff22;
+			color: #bf94ff;
+		}
+
+		footer {
+			text-align: center;
+			margin-top: 3rem;
+			color: #53535f;
+			font-size: 0.85rem;
+		}
+
 		.search {
 			display: block;
 			width: 100%;
 			max-width: 400px;
-			margin: 1.5rem auto;
+			margin: 0 auto 1.5rem;
 			padding: 0.6rem 1rem;
 			background: #1f1f23;
 			border: 1px solid #303032;
@@ -63,7 +103,6 @@
 			display: grid;
 			grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
 			gap: 0.6rem;
-			margin-top: 1.5rem;
 		}
 
 		.command {
@@ -77,6 +116,7 @@
 			transition: border-color 0.15s, background 0.15s;
 			cursor: pointer;
 			user-select: none;
+			color: #efeff1;
 		}
 
 		.command:hover {
@@ -92,13 +132,6 @@
 		.command.hidden {
 			display: none;
 		}
-
-		footer {
-			text-align: center;
-			margin-top: 3rem;
-			color: #53535f;
-			font-size: 0.85rem;
-		}
 	</style>
 </head>
 <body>
@@ -107,6 +140,13 @@
 			<h1>aionjanis Voice Commands</h1>
 			<p class="subtitle">Click to copy, then paste in chat! <span class="count">229</span> commands available.</p>
 		</header>
+
+		<nav>
+			<span class="nav-link active">Commands</span>
+			<a class="nav-link" href="stats-yesterday.html">Top Yesterday</a>
+			<a class="nav-link" href="stats-weekly.html">Top This Week</a>
+			<a class="nav-link" href="stats-alltime.html">Top All-Time</a>
+		</nav>
 
 		<input type="text" class="search" placeholder="Search commands..." id="search">
 
@@ -343,7 +383,7 @@
 		</div>
 
 		<footer>
-			Updated 2026-03-15 17:28:30 UTC
+			Updated 2026-03-15 17:41:14 UTC
 		</footer>
 	</div>
 
