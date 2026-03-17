@@ -81,22 +81,47 @@
 			font-size: 0.85rem;
 		}
 
-		.search {
-			display: block;
+		.search-wrapper {
+			position: relative;
 			width: 100%;
 			max-width: 400px;
 			margin: 0 auto 1.5rem;
-			padding: 0.6rem 1rem;
+		}
+
+		.search {
+			display: block;
+			width: 100%;
+			padding: 0.6rem 2.2rem 0.6rem 1rem;
 			background: #1f1f23;
 			border: 1px solid #303032;
 			border-radius: 6px;
 			color: #efeff1;
 			font-size: 1rem;
 			outline: none;
+			box-sizing: border-box;
 		}
 
 		.search:focus {
 			border-color: #bf94ff;
+		}
+
+		.search-clear {
+			position: absolute;
+			right: 0.5rem;
+			top: 50%;
+			transform: translateY(-50%);
+			background: none;
+			border: none;
+			color: #adadb8;
+			font-size: 1.2rem;
+			cursor: pointer;
+			display: none;
+			padding: 0.2rem 0.4rem;
+			line-height: 1;
+		}
+
+		.search-clear:hover {
+			color: #efeff1;
 		}
 
 		.commands {
@@ -112,7 +137,10 @@
 			padding: 0.6rem 1rem;
 			font-family: 'Consolas', 'Courier New', monospace;
 			font-size: 0.95rem;
-			text-align: center;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 0.4rem;
 			transition: border-color 0.15s, background 0.15s;
 			cursor: pointer;
 			user-select: none;
@@ -240,6 +268,31 @@
 		.chain-clear-btn:hover {
 			background: #53535f;
 		}
+
+		.preview-btn {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 1.4rem;
+			height: 1.4rem;
+			font-size: 0.7rem;
+			background: #303032;
+			border-radius: 50%;
+			color: #adadb8;
+			cursor: pointer;
+			transition: background 0.15s, color 0.15s;
+			flex-shrink: 0;
+		}
+
+		.preview-btn:hover {
+			background: #bf94ff;
+			color: #0e0e10;
+		}
+
+		.preview-btn.playing {
+			background: #bf94ff;
+			color: #0e0e10;
+		}
 	</style>
 </head>
 <body>
@@ -265,332 +318,395 @@
 			<button class="chain-copy-btn chain-clear-btn" id="chainClearBtn">Clear</button>
 		</div>
 
-		<input type="text" class="search" placeholder="Search commands..." id="search">
+		<div class="search-wrapper">
+			<input type="text" class="search" placeholder="Search commands..." id="search">
+			<button class="search-clear" id="searchClear">&times;</button>
+		</div>
 
 		<div class="commands" id="commands">
-				<button class="command" onclick="copy(this)">!10hours</button>
-				<button class="command" onclick="copy(this)">!11maids</button>
-				<button class="command" onclick="copy(this)">!2virgins</button>
-				<button class="command" onclick="copy(this)">!4khardaction</button>
-				<button class="command" onclick="copy(this)">!ahh</button>
-				<button class="command" onclick="copy(this)">!ahhdak</button>
-				<button class="command" onclick="copy(this)">!ahhyes</button>
-				<button class="command" onclick="copy(this)">!ajajaj</button>
-				<button class="command" onclick="copy(this)">!alreadycame</button>
-				<button class="command" onclick="copy(this)">!alright</button>
-				<button class="command" onclick="copy(this)">!anal</button>
-				<button class="command" onclick="copy(this)">!ananas</button>
-				<button class="command" onclick="copy(this)">!areare</button>
-				<button class="command" onclick="copy(this)">!areareare</button>
-				<button class="command" onclick="copy(this)">!ass</button>
-				<button class="command" onclick="copy(this)">!athlete</button>
-				<button class="command" onclick="copy(this)">!awoo</button>
-				<button class="command" onclick="copy(this)">!ayayay</button>
-				<button class="command" onclick="copy(this)">!banana</button>
-				<button class="command" onclick="copy(this)">!batman</button>
-				<button class="command" onclick="copy(this)">!bdsm</button>
-				<button class="command" onclick="copy(this)">!bedroom</button>
-				<button class="command" onclick="copy(this)">!big</button>
-				<button class="command" onclick="copy(this)">!bigbro</button>
-				<button class="command" onclick="copy(this)">!bigger</button>
-				<button class="command" onclick="copy(this)">!biggerthanmydick</button>
-				<button class="command" onclick="copy(this)">!bighole</button>
-				<button class="command" onclick="copy(this)">!bigofadick</button>
-				<button class="command" onclick="copy(this)">!birthday</button>
-				<button class="command" onclick="copy(this)">!ble</button>
-				<button class="command" onclick="copy(this)">!bluesquare</button>
-				<button class="command" onclick="copy(this)">!boing</button>
-				<button class="command" onclick="copy(this)">!boing2</button>
-				<button class="command" onclick="copy(this)">!boobmeasuring</button>
-				<button class="command" onclick="copy(this)">!boom</button>
-				<button class="command" onclick="copy(this)">!brainlag</button>
-				<button class="command" onclick="copy(this)">!budgetfeet</button>
-				<button class="command" onclick="copy(this)">!bug</button>
-				<button class="command" onclick="copy(this)">!bugle</button>
-				<button class="command" onclick="copy(this)">!bugs</button>
-				<button class="command" onclick="copy(this)">!bull</button>
-				<button class="command" onclick="copy(this)">!bunchofcocks</button>
-				<button class="command" onclick="copy(this)">!burgerbuns</button>
-				<button class="command" onclick="copy(this)">!burp</button>
-				<button class="command" onclick="copy(this)">!butt</button>
-				<button class="command" onclick="copy(this)">!cake</button>
-				<button class="command" onclick="copy(this)">!callmeout</button>
-				<button class="command" onclick="copy(this)">!canhaveme</button>
-				<button class="command" onclick="copy(this)">!cantbecumpie</button>
-				<button class="command" onclick="copy(this)">!chatpickles</button>
-				<button class="command" onclick="copy(this)">!clapped</button>
-				<button class="command" onclick="copy(this)">!comefrombehind</button>
-				<button class="command" onclick="copy(this)">!comingnow</button>
-				<button class="command" onclick="copy(this)">!confused</button>
-				<button class="command" onclick="copy(this)">!controlcums</button>
-				<button class="command" onclick="copy(this)">!cox</button>
-				<button class="command" onclick="copy(this)">!crafting</button>
-				<button class="command" onclick="copy(this)">!crispybottom</button>
-				<button class="command" onclick="copy(this)">!cum</button>
-				<button class="command" onclick="copy(this)">!cumpie</button>
-				<button class="command" onclick="copy(this)">!cuteballs</button>
-				<button class="command" onclick="copy(this)">!cutscene</button>
-				<button class="command" onclick="copy(this)">!daddyforgiveme</button>
-				<button class="command" onclick="copy(this)">!dd</button>
-				<button class="command" onclick="copy(this)">!dead</button>
-				<button class="command" onclick="copy(this)">!deconthatthang</button>
-				<button class="command" onclick="copy(this)">!delicious</button>
-				<button class="command" onclick="copy(this)">!dgaf</button>
-				<button class="command" onclick="copy(this)">!dickcaptain</button>
-				<button class="command" onclick="copy(this)">!died</button>
-				<button class="command" onclick="copy(this)">!dig</button>
-				<button class="command" onclick="copy(this)">!doctor</button>
-				<button class="command" onclick="copy(this)">!doctordoingit</button>
-				<button class="command" onclick="copy(this)">!doilikethis</button>
-				<button class="command" onclick="copy(this)">!dome</button>
-				<button class="command" onclick="copy(this)">!domo</button>
-				<button class="command" onclick="copy(this)">!dontdothatshit</button>
-				<button class="command" onclick="copy(this)">!downgraded</button>
-				<button class="command" onclick="copy(this)">!drink</button>
-				<button class="command" onclick="copy(this)">!drinkpee</button>
-				<button class="command" onclick="copy(this)">!edit</button>
-				<button class="command" onclick="copy(this)">!emptypenis</button>
-				<button class="command" onclick="copy(this)">!excusememam</button>
-				<button class="command" onclick="copy(this)">!expiredrod</button>
-				<button class="command" onclick="copy(this)">!fbi</button>
-				<button class="command" onclick="copy(this)">!feelsgood</button>
-				<button class="command" onclick="copy(this)">!feetdm</button>
-				<button class="command" onclick="copy(this)">!feetfinder</button>
-				<button class="command" onclick="copy(this)">!feetpics</button>
-				<button class="command" onclick="copy(this)">!feetsnack</button>
-				<button class="command" onclick="copy(this)">!fewstrongmen</button>
-				<button class="command" onclick="copy(this)">!fire</button>
-				<button class="command" onclick="copy(this)">!fkyouinsta</button>
-				<button class="command" onclick="copy(this)">!flaccid</button>
-				<button class="command" onclick="copy(this)">!footcollector</button>
-				<button class="command" onclick="copy(this)">!footguy</button>
-				<button class="command" onclick="copy(this)">!footman</button>
-				<button class="command" onclick="copy(this)">!forgotcrons</button>
-				<button class="command" onclick="copy(this)">!fuck</button>
-				<button class="command" onclick="copy(this)">!fucking</button>
-				<button class="command" onclick="copy(this)">!fuckinghole</button>
-				<button class="command" onclick="copy(this)">!fucklizard</button>
-				<button class="command" onclick="copy(this)">!fuckyes</button>
-				<button class="command" onclick="copy(this)">!fulldec</button>
-				<button class="command" onclick="copy(this)">!gamblenuts</button>
-				<button class="command" onclick="copy(this)">!gangbang</button>
-				<button class="command" onclick="copy(this)">!get</button>
-				<button class="command" onclick="copy(this)">!getitup</button>
-				<button class="command" onclick="copy(this)">!giantpole</button>
-				<button class="command" onclick="copy(this)">!giggity</button>
-				<button class="command" onclick="copy(this)">!gmorning</button>
-				<button class="command" onclick="copy(this)">!gobble</button>
-				<button class="command" onclick="copy(this)">!godilove</button>
-				<button class="command" onclick="copy(this)">!goodboy</button>
-				<button class="command" onclick="copy(this)">!goodgirl</button>
-				<button class="command" onclick="copy(this)">!grippers</button>
-				<button class="command" onclick="copy(this)">!groaning</button>
-				<button class="command" onclick="copy(this)">!guys</button>
-				<button class="command" onclick="copy(this)">!haha</button>
-				<button class="command" onclick="copy(this)">!hahaa</button>
-				<button class="command" onclick="copy(this)">!hahainsta</button>
-				<button class="command" onclick="copy(this)">!help</button>
-				<button class="command" onclick="copy(this)">!hey</button>
-				<button class="command" onclick="copy(this)">!heybicep</button>
-				<button class="command" onclick="copy(this)">!heydaddy</button>
-				<button class="command" onclick="copy(this)">!holdon</button>
-				<button class="command" onclick="copy(this)">!holyshit</button>
-				<button class="command" onclick="copy(this)">!how</button>
-				<button class="command" onclick="copy(this)">!howldyshit</button>
-				<button class="command" onclick="copy(this)">!huehue</button>
-				<button class="command" onclick="copy(this)">!iamcake</button>
-				<button class="command" onclick="copy(this)">!idontstink</button>
-				<button class="command" onclick="copy(this)">!ifdoctorok</button>
-				<button class="command" onclick="copy(this)">!ifistshai</button>
-				<button class="command" onclick="copy(this)">!ilikecocks</button>
-				<button class="command" onclick="copy(this)">!ilikethat</button>
-				<button class="command" onclick="copy(this)">!ilikethis</button>
-				<button class="command" onclick="copy(this)">!ilovecoming</button>
-				<button class="command" onclick="copy(this)">!ilovekitty</button>
-				<button class="command" onclick="copy(this)">!imsupple</button>
-				<button class="command" onclick="copy(this)">!imtheproblem</button>
-				<button class="command" onclick="copy(this)">!imurman</button>
-				<button class="command" onclick="copy(this)">!ineedarod</button>
-				<button class="command" onclick="copy(this)">!ineedmore</button>
-				<button class="command" onclick="copy(this)">!iremember</button>
-				<button class="command" onclick="copy(this)">!isoldmymeat</button>
-				<button class="command" onclick="copy(this)">!ispeakfacts</button>
-				<button class="command" onclick="copy(this)">!itspalmella</button>
-				<button class="command" onclick="copy(this)">!itstoes</button>
-				<button class="command" onclick="copy(this)">!iwantdec</button>
-				<button class="command" onclick="copy(this)">!jerk</button>
-				<button class="command" onclick="copy(this)">!jerkpigs</button>
-				<button class="command" onclick="copy(this)">!juicy</button>
-				<button class="command" onclick="copy(this)">!kekw</button>
-				<button class="command" onclick="copy(this)">!keytohappiness</button>
-				<button class="command" onclick="copy(this)">!kickass</button>
-				<button class="command" onclick="copy(this)">!kickintheballs</button>
-				<button class="command" onclick="copy(this)">!leap</button>
-				<button class="command" onclick="copy(this)">!leavemebe</button>
-				<button class="command" onclick="copy(this)">!lick</button>
-				<button class="command" onclick="copy(this)">!lizard</button>
-				<button class="command" onclick="copy(this)">!lizrdfaster</button>
-				<button class="command" onclick="copy(this)">!lllllll</button>
-				<button class="command" onclick="copy(this)">!lmao</button>
-				<button class="command" onclick="copy(this)">!lol</button>
-				<button class="command" onclick="copy(this)">!lookattoes</button>
-				<button class="command" onclick="copy(this)">!lovesucking</button>
-				<button class="command" onclick="copy(this)">!lube</button>
-				<button class="command" onclick="copy(this)">!massage</button>
-				<button class="command" onclick="copy(this)">!meow</button>
-				<button class="command" onclick="copy(this)">!meowmeow</button>
-				<button class="command" onclick="copy(this)">!minedoesnt</button>
-				<button class="command" onclick="copy(this)">!mmm</button>
-				<button class="command" onclick="copy(this)">!mmmgood</button>
-				<button class="command" onclick="copy(this)">!mofos</button>
-				<button class="command" onclick="copy(this)">!moist</button>
-				<button class="command" onclick="copy(this)">!money</button>
-				<button class="command" onclick="copy(this)">!monitor</button>
-				<button class="command" onclick="copy(this)">!monkey</button>
-				<button class="command" onclick="copy(this)">!moredivinascar</button>
-				<button class="command" onclick="copy(this)">!morefeetsyay</button>
-				<button class="command" onclick="copy(this)">!movie</button>
-				<button class="command" onclick="copy(this)">!need</button>
-				<button class="command" onclick="copy(this)">!needfeet</button>
-				<button class="command" onclick="copy(this)">!needhelp</button>
-				<button class="command" onclick="copy(this)">!neverhour</button>
-				<button class="command" onclick="copy(this)">!nicefeet</button>
-				<button class="command" onclick="copy(this)">!nickky</button>
-				<button class="command" onclick="copy(this)">!nickkystinks</button>
-				<button class="command" onclick="copy(this)">!nixxu</button>
-				<button class="command" onclick="copy(this)">!nofeet</button>
-				<button class="command" onclick="copy(this)">!nofuckingway</button>
-				<button class="command" onclick="copy(this)">!nomushy</button>
-				<button class="command" onclick="copy(this)">!nono</button>
-				<button class="command" onclick="copy(this)">!nonono</button>
-				<button class="command" onclick="copy(this)">!nope</button>
-				<button class="command" onclick="copy(this)">!notabitch</button>
-				<button class="command" onclick="copy(this)">!notillegal</button>
-				<button class="command" onclick="copy(this)">!noway</button>
-				<button class="command" onclick="copy(this)">!noway2</button>
-				<button class="command" onclick="copy(this)">!nyan</button>
-				<button class="command" onclick="copy(this)">!officer</button>
-				<button class="command" onclick="copy(this)">!officer2</button>
-				<button class="command" onclick="copy(this)">!oh</button>
-				<button class="command" onclick="copy(this)">!ohdamn</button>
-				<button class="command" onclick="copy(this)">!ohgod</button>
-				<button class="command" onclick="copy(this)">!ohh</button>
-				<button class="command" onclick="copy(this)">!ohyeah</button>
-				<button class="command" onclick="copy(this)">!omg</button>
-				<button class="command" onclick="copy(this)">!omgbicep</button>
-				<button class="command" onclick="copy(this)">!omgmushy</button>
-				<button class="command" onclick="copy(this)">!onemore</button>
-				<button class="command" onclick="copy(this)">!onichan</button>
-				<button class="command" onclick="copy(this)">!onyourface</button>
-				<button class="command" onclick="copy(this)">!orgyyet</button>
-				<button class="command" onclick="copy(this)">!otherspee</button>
-				<button class="command" onclick="copy(this)">!palmela</button>
-				<button class="command" onclick="copy(this)">!palmellacramps</button>
-				<button class="command" onclick="copy(this)">!pantschecks</button>
-				<button class="command" onclick="copy(this)">!pee</button>
-				<button class="command" onclick="copy(this)">!pennar</button>
-				<button class="command" onclick="copy(this)">!picklefuck</button>
-				<button class="command" onclick="copy(this)">!pig</button>
-				<button class="command" onclick="copy(this)">!pokinginyou</button>
-				<button class="command" onclick="copy(this)">!practice</button>
-				<button class="command" onclick="copy(this)">!prettygood</button>
-				<button class="command" onclick="copy(this)">!prettyprincess</button>
-				<button class="command" onclick="copy(this)">!prostate</button>
-				<button class="command" onclick="copy(this)">!punchtesticles</button>
-				<button class="command" onclick="copy(this)">!rabbit</button>
-				<button class="command" onclick="copy(this)">!rainingdicks</button>
-				<button class="command" onclick="copy(this)">!ready</button>
-				<button class="command" onclick="copy(this)">!realboy</button>
-				<button class="command" onclick="copy(this)">!roomfire</button>
-				<button class="command" onclick="copy(this)">!ruhroh</button>
-				<button class="command" onclick="copy(this)">!ruintobuttstuff</button>
-				<button class="command" onclick="copy(this)">!saltystuff</button>
-				<button class="command" onclick="copy(this)">!scractch</button>
-				<button class="command" onclick="copy(this)">!seeleap</button>
-				<button class="command" onclick="copy(this)">!serious</button>
-				<button class="command" onclick="copy(this)">!seriousstream</button>
-				<button class="command" onclick="copy(this)">!sex</button>
-				<button class="command" onclick="copy(this)">!shoesandsocks</button>
-				<button class="command" onclick="copy(this)">!sinners</button>
-				<button class="command" onclick="copy(this)">!slipup</button>
-				<button class="command" onclick="copy(this)">!smol</button>
-				<button class="command" onclick="copy(this)">!sohard</button>
-				<button class="command" onclick="copy(this)">!someguyslikeit</button>
-				<button class="command" onclick="copy(this)">!sonofa</button>
-				<button class="command" onclick="copy(this)">!soundswrong</button>
-				<button class="command" onclick="copy(this)">!spanked</button>
-				<button class="command" onclick="copy(this)">!spankharder</button>
-				<button class="command" onclick="copy(this)">!spankingguy</button>
-				<button class="command" onclick="copy(this)">!spit</button>
-				<button class="command" onclick="copy(this)">!splooge</button>
-				<button class="command" onclick="copy(this)">!stepbro</button>
-				<button class="command" onclick="copy(this)">!steponme</button>
-				<button class="command" onclick="copy(this)">!stickinthere</button>
-				<button class="command" onclick="copy(this)">!stopfucking</button>
-				<button class="command" onclick="copy(this)">!stopping</button>
-				<button class="command" onclick="copy(this)">!stroke</button>
-				<button class="command" onclick="copy(this)">!stuffupyourbutt</button>
-				<button class="command" onclick="copy(this)">!suckatoe</button>
-				<button class="command" onclick="copy(this)">!sucking</button>
-				<button class="command" onclick="copy(this)">!suckingaction</button>
-				<button class="command" onclick="copy(this)">!suckingass</button>
-				<button class="command" onclick="copy(this)">!suckingtoes</button>
-				<button class="command" onclick="copy(this)">!suckthemselves</button>
-				<button class="command" onclick="copy(this)">!swipper</button>
-				<button class="command" onclick="copy(this)">!tappp</button>
-				<button class="command" onclick="copy(this)">!thankyou</button>
-				<button class="command" onclick="copy(this)">!thatsgoingtobeagoodone</button>
-				<button class="command" onclick="copy(this)">!thereshole</button>
-				<button class="command" onclick="copy(this)">!therewillbefeet</button>
-				<button class="command" onclick="copy(this)">!thighs3x</button>
-				<button class="command" onclick="copy(this)">!thighsyes</button>
-				<button class="command" onclick="copy(this)">!thisisfine</button>
-				<button class="command" onclick="copy(this)">!thoseguys</button>
-				<button class="command" onclick="copy(this)">!toesforme</button>
-				<button class="command" onclick="copy(this)">!toesies</button>
-				<button class="command" onclick="copy(this)">!toesinthroat</button>
-				<button class="command" onclick="copy(this)">!toestoday</button>
-				<button class="command" onclick="copy(this)">!toilet</button>
-				<button class="command" onclick="copy(this)">!tsktsk</button>
-				<button class="command" onclick="copy(this)">!twink</button>
-				<button class="command" onclick="copy(this)">!uptheass</button>
-				<button class="command" onclick="copy(this)">!uptheass2</button>
-				<button class="command" onclick="copy(this)">!upthebutt</button>
-				<button class="command" onclick="copy(this)">!vaporeon</button>
-				<button class="command" onclick="copy(this)">!voicesinass</button>
-				<button class="command" onclick="copy(this)">!wantyoutoknow</button>
-				<button class="command" onclick="copy(this)">!washhands</button>
-				<button class="command" onclick="copy(this)">!welcome</button>
-				<button class="command" onclick="copy(this)">!what</button>
-				<button class="command" onclick="copy(this)">!whatstepbro</button>
-				<button class="command" onclick="copy(this)">!whenhour</button>
-				<button class="command" onclick="copy(this)">!wherehole</button>
-				<button class="command" onclick="copy(this)">!whipped</button>
-				<button class="command" onclick="copy(this)">!whypoking</button>
-				<button class="command" onclick="copy(this)">!wiehabts</button>
-				<button class="command" onclick="copy(this)">!wife</button>
-				<button class="command" onclick="copy(this)">!wifesbody</button>
-				<button class="command" onclick="copy(this)">!willtherebefeet</button>
-				<button class="command" onclick="copy(this)">!wow</button>
-				<button class="command" onclick="copy(this)">!wtf</button>
-				<button class="command" onclick="copy(this)">!wtfinsta</button>
-				<button class="command" onclick="copy(this)">!wtfnickky</button>
-				<button class="command" onclick="copy(this)">!yaknow</button>
-				<button class="command" onclick="copy(this)">!yesss</button>
-				<button class="command" onclick="copy(this)">!yeti</button>
+				<button class="command" data-added="2026-03-14" data-uses="12" onclick="copy(this)"><span class="cmd-name">!10hours</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="4" onclick="copy(this)"><span class="cmd-name">!11maids</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="9" onclick="copy(this)"><span class="cmd-name">!2virgins</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="4" onclick="copy(this)"><span class="cmd-name">!4khardaction</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="258" onclick="copy(this)"><span class="cmd-name">!ahh</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="5" onclick="copy(this)"><span class="cmd-name">!ahhdak</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="4" onclick="copy(this)"><span class="cmd-name">!ahhyes</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="2" onclick="copy(this)"><span class="cmd-name">!ajajaj</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="2" onclick="copy(this)"><span class="cmd-name">!alreadycame</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="7" onclick="copy(this)"><span class="cmd-name">!alright</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="19" onclick="copy(this)"><span class="cmd-name">!anal</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="2" onclick="copy(this)"><span class="cmd-name">!ananas</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="0" onclick="copy(this)"><span class="cmd-name">!areare</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!areareare</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="52" onclick="copy(this)"><span class="cmd-name">!ass</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="1" onclick="copy(this)"><span class="cmd-name">!athlete</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="19" onclick="copy(this)"><span class="cmd-name">!awoo</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="0" onclick="copy(this)"><span class="cmd-name">!ayayay</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="14" onclick="copy(this)"><span class="cmd-name">!banana</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="13" onclick="copy(this)"><span class="cmd-name">!batman</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="6" onclick="copy(this)"><span class="cmd-name">!bdsm</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="2" onclick="copy(this)"><span class="cmd-name">!bedroom</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="76" onclick="copy(this)"><span class="cmd-name">!big</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="40" onclick="copy(this)"><span class="cmd-name">!bigbro</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="6" onclick="copy(this)"><span class="cmd-name">!bigger</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="7" onclick="copy(this)"><span class="cmd-name">!biggerthanmydick</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="4" onclick="copy(this)"><span class="cmd-name">!bighole</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="10" onclick="copy(this)"><span class="cmd-name">!bigofadick</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!birthday</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!ble</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="6" onclick="copy(this)"><span class="cmd-name">!bluesquare</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="14" onclick="copy(this)"><span class="cmd-name">!boing</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!boing2</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="2" onclick="copy(this)"><span class="cmd-name">!boobmeasuring</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="8" onclick="copy(this)"><span class="cmd-name">!boom</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="0" onclick="copy(this)"><span class="cmd-name">!brainlag</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="18" onclick="copy(this)"><span class="cmd-name">!budgetfeet</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="8" onclick="copy(this)"><span class="cmd-name">!bug</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!bugle</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="2" onclick="copy(this)"><span class="cmd-name">!bugs</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="18" onclick="copy(this)"><span class="cmd-name">!bull</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="10" onclick="copy(this)"><span class="cmd-name">!bunchofcocks</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="0" onclick="copy(this)"><span class="cmd-name">!burgerbuns</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="1" onclick="copy(this)"><span class="cmd-name">!burp</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="16" onclick="copy(this)"><span class="cmd-name">!butt</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="5" onclick="copy(this)"><span class="cmd-name">!cake</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="3" onclick="copy(this)"><span class="cmd-name">!callmeout</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!canhaveme</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="3" onclick="copy(this)"><span class="cmd-name">!cantbecumpie</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="4" onclick="copy(this)"><span class="cmd-name">!chatpickles</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="34" onclick="copy(this)"><span class="cmd-name">!clapped</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="15" onclick="copy(this)"><span class="cmd-name">!comefrombehind</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!comingnow</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="1" onclick="copy(this)"><span class="cmd-name">!confused</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="13" onclick="copy(this)"><span class="cmd-name">!controlcums</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="14" onclick="copy(this)"><span class="cmd-name">!cox</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="6" onclick="copy(this)"><span class="cmd-name">!crafting</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="1" onclick="copy(this)"><span class="cmd-name">!crispybottom</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="31" onclick="copy(this)"><span class="cmd-name">!cum</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="7" onclick="copy(this)"><span class="cmd-name">!cumpie</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!cuteballs</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="0" onclick="copy(this)"><span class="cmd-name">!cutscene</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!daddyforgiveme</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="3" onclick="copy(this)"><span class="cmd-name">!dd</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="2" onclick="copy(this)"><span class="cmd-name">!dead</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="3" onclick="copy(this)"><span class="cmd-name">!deconthatthang</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="1" onclick="copy(this)"><span class="cmd-name">!delicious</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="4" onclick="copy(this)"><span class="cmd-name">!dgaf</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="17" onclick="copy(this)"><span class="cmd-name">!dickcaptain</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="1" onclick="copy(this)"><span class="cmd-name">!died</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!dig</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="15" onclick="copy(this)"><span class="cmd-name">!doctor</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="3" onclick="copy(this)"><span class="cmd-name">!doctordoingit</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!doilikethis</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="2" onclick="copy(this)"><span class="cmd-name">!dome</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="6" onclick="copy(this)"><span class="cmd-name">!domo</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="11" onclick="copy(this)"><span class="cmd-name">!dontdothatshit</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="0" onclick="copy(this)"><span class="cmd-name">!downgraded</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="5" onclick="copy(this)"><span class="cmd-name">!drink</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="21" onclick="copy(this)"><span class="cmd-name">!drinkpee</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!edit</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="13" onclick="copy(this)"><span class="cmd-name">!emptypenis</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="2" onclick="copy(this)"><span class="cmd-name">!excusememam</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="0" onclick="copy(this)"><span class="cmd-name">!expiredrod</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="20" onclick="copy(this)"><span class="cmd-name">!fbi</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="0" onclick="copy(this)"><span class="cmd-name">!feelsgood</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="12" onclick="copy(this)"><span class="cmd-name">!feetdm</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="31" onclick="copy(this)"><span class="cmd-name">!feetfinder</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="6" onclick="copy(this)"><span class="cmd-name">!feetpics</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!feetsnack</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="3" onclick="copy(this)"><span class="cmd-name">!fewstrongmen</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!fire</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="1" onclick="copy(this)"><span class="cmd-name">!fkyouinsta</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="29" onclick="copy(this)"><span class="cmd-name">!flaccid</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="8" onclick="copy(this)"><span class="cmd-name">!footcollector</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="60" onclick="copy(this)"><span class="cmd-name">!footguy</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="14" onclick="copy(this)"><span class="cmd-name">!footman</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!forgotcrons</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="12" onclick="copy(this)"><span class="cmd-name">!fuck</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="1" onclick="copy(this)"><span class="cmd-name">!fucking</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="5" onclick="copy(this)"><span class="cmd-name">!fuckinghole</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="6" onclick="copy(this)"><span class="cmd-name">!fucklizard</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="4" onclick="copy(this)"><span class="cmd-name">!fuckyes</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="1" onclick="copy(this)"><span class="cmd-name">!fulldec</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="0" onclick="copy(this)"><span class="cmd-name">!gamblenuts</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="13" onclick="copy(this)"><span class="cmd-name">!gangbang</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!get</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="2" onclick="copy(this)"><span class="cmd-name">!getitup</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="14" onclick="copy(this)"><span class="cmd-name">!giantpole</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="5" onclick="copy(this)"><span class="cmd-name">!giggity</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="23" onclick="copy(this)"><span class="cmd-name">!gmorning</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="5" onclick="copy(this)"><span class="cmd-name">!gobble</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="0" onclick="copy(this)"><span class="cmd-name">!godilove</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="4" onclick="copy(this)"><span class="cmd-name">!goodboy</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="8" onclick="copy(this)"><span class="cmd-name">!goodgirl</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="2" onclick="copy(this)"><span class="cmd-name">!grippers</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!groaning</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="5" onclick="copy(this)"><span class="cmd-name">!guys</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="67" onclick="copy(this)"><span class="cmd-name">!haha</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="8" onclick="copy(this)"><span class="cmd-name">!hahaa</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="0" onclick="copy(this)"><span class="cmd-name">!hahainsta</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="13" onclick="copy(this)"><span class="cmd-name">!help</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="17" onclick="copy(this)"><span class="cmd-name">!hey</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="14" onclick="copy(this)"><span class="cmd-name">!heybicep</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="12" onclick="copy(this)"><span class="cmd-name">!heydaddy</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="5" onclick="copy(this)"><span class="cmd-name">!holdon</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="17" onclick="copy(this)"><span class="cmd-name">!holyshit</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="1" onclick="copy(this)"><span class="cmd-name">!how</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="8" onclick="copy(this)"><span class="cmd-name">!howldyshit</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="3" onclick="copy(this)"><span class="cmd-name">!huehue</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="5" onclick="copy(this)"><span class="cmd-name">!iamcake</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="7" onclick="copy(this)"><span class="cmd-name">!idontstink</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="4" onclick="copy(this)"><span class="cmd-name">!ifdoctorok</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!ifistshai</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="32" onclick="copy(this)"><span class="cmd-name">!ilikecocks</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="1" onclick="copy(this)"><span class="cmd-name">!ilikethat</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!ilikethis</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="5" onclick="copy(this)"><span class="cmd-name">!ilovecoming</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="15" onclick="copy(this)"><span class="cmd-name">!ilovekitty</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="0" onclick="copy(this)"><span class="cmd-name">!imsupple</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="2" onclick="copy(this)"><span class="cmd-name">!imtheproblem</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="1" onclick="copy(this)"><span class="cmd-name">!imurman</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="0" onclick="copy(this)"><span class="cmd-name">!ineedarod</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="7" onclick="copy(this)"><span class="cmd-name">!ineedmore</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="3" onclick="copy(this)"><span class="cmd-name">!iremember</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="2" onclick="copy(this)"><span class="cmd-name">!isoldmymeat</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="3" onclick="copy(this)"><span class="cmd-name">!ispeakfacts</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="1" onclick="copy(this)"><span class="cmd-name">!itspalmella</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="1" onclick="copy(this)"><span class="cmd-name">!itstoes</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!iwantdec</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="27" onclick="copy(this)"><span class="cmd-name">!jerk</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="103" onclick="copy(this)"><span class="cmd-name">!jerkpigs</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="5" onclick="copy(this)"><span class="cmd-name">!juicy</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="1" onclick="copy(this)"><span class="cmd-name">!kekw</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="13" onclick="copy(this)"><span class="cmd-name">!keytohappiness</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="2" onclick="copy(this)"><span class="cmd-name">!kickass</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="6" onclick="copy(this)"><span class="cmd-name">!kickintheballs</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="0" onclick="copy(this)"><span class="cmd-name">!leap</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="4" onclick="copy(this)"><span class="cmd-name">!leavemebe</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="40" onclick="copy(this)"><span class="cmd-name">!lick</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="7" onclick="copy(this)"><span class="cmd-name">!lizard</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="40" onclick="copy(this)"><span class="cmd-name">!lizrdfaster</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="43" onclick="copy(this)"><span class="cmd-name">!lllllll</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="3" onclick="copy(this)"><span class="cmd-name">!lmao</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="59" onclick="copy(this)"><span class="cmd-name">!lol</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!lookattoes</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!lovesucking</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="37" onclick="copy(this)"><span class="cmd-name">!lube</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!massage</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="32" onclick="copy(this)"><span class="cmd-name">!meow</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="51" onclick="copy(this)"><span class="cmd-name">!meowmeow</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="2" onclick="copy(this)"><span class="cmd-name">!minedoesnt</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="17" onclick="copy(this)"><span class="cmd-name">!mmm</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="33" onclick="copy(this)"><span class="cmd-name">!mmmgood</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="56" onclick="copy(this)"><span class="cmd-name">!mofos</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="12" onclick="copy(this)"><span class="cmd-name">!moist</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="2" onclick="copy(this)"><span class="cmd-name">!money</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="26" onclick="copy(this)"><span class="cmd-name">!monitor</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="9" onclick="copy(this)"><span class="cmd-name">!monkey</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="0" onclick="copy(this)"><span class="cmd-name">!moredivinascar</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="3" onclick="copy(this)"><span class="cmd-name">!morefeetsyay</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="0" onclick="copy(this)"><span class="cmd-name">!movie</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="0" onclick="copy(this)"><span class="cmd-name">!need</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="8" onclick="copy(this)"><span class="cmd-name">!needfeet</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="0" onclick="copy(this)"><span class="cmd-name">!needhelp</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="1" onclick="copy(this)"><span class="cmd-name">!neverhour</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="5" onclick="copy(this)"><span class="cmd-name">!nicefeet</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="7" onclick="copy(this)"><span class="cmd-name">!nickky</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="7" onclick="copy(this)"><span class="cmd-name">!nickkystinks</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="5" onclick="copy(this)"><span class="cmd-name">!nixxu</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="10" onclick="copy(this)"><span class="cmd-name">!nofeet</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="10" onclick="copy(this)"><span class="cmd-name">!nofuckingway</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="0" onclick="copy(this)"><span class="cmd-name">!nomushy</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="15" onclick="copy(this)"><span class="cmd-name">!nono</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="10" onclick="copy(this)"><span class="cmd-name">!nonono</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="0" onclick="copy(this)"><span class="cmd-name">!nope</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!notabitch</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="0" onclick="copy(this)"><span class="cmd-name">!notillegal</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="20" onclick="copy(this)"><span class="cmd-name">!noway</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="1" onclick="copy(this)"><span class="cmd-name">!noway2</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!nyan</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!officer</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!officer2</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="2" onclick="copy(this)"><span class="cmd-name">!oh</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="1" onclick="copy(this)"><span class="cmd-name">!ohdamn</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="0" onclick="copy(this)"><span class="cmd-name">!ohgod</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="1" onclick="copy(this)"><span class="cmd-name">!ohh</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="19" onclick="copy(this)"><span class="cmd-name">!ohyeah</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="14" onclick="copy(this)"><span class="cmd-name">!omg</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="6" onclick="copy(this)"><span class="cmd-name">!omgbicep</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="5" onclick="copy(this)"><span class="cmd-name">!omgmushy</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="0" onclick="copy(this)"><span class="cmd-name">!onemore</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="16" onclick="copy(this)"><span class="cmd-name">!onichan</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="0" onclick="copy(this)"><span class="cmd-name">!onyourface</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="15" onclick="copy(this)"><span class="cmd-name">!orgyyet</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!otherspee</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="17" onclick="copy(this)"><span class="cmd-name">!palmela</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="7" onclick="copy(this)"><span class="cmd-name">!palmellacramps</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="10" onclick="copy(this)"><span class="cmd-name">!pantschecks</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="23" onclick="copy(this)"><span class="cmd-name">!pee</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="15" onclick="copy(this)"><span class="cmd-name">!pennar</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="6" onclick="copy(this)"><span class="cmd-name">!picklefuck</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="65" onclick="copy(this)"><span class="cmd-name">!pig</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="10" onclick="copy(this)"><span class="cmd-name">!pokinginyou</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="39" onclick="copy(this)"><span class="cmd-name">!practice</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="0" onclick="copy(this)"><span class="cmd-name">!prettygood</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="4" onclick="copy(this)"><span class="cmd-name">!prettyprincess</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="30" onclick="copy(this)"><span class="cmd-name">!prostate</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="2" onclick="copy(this)"><span class="cmd-name">!punchtesticles</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="10" onclick="copy(this)"><span class="cmd-name">!rabbit</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="7" onclick="copy(this)"><span class="cmd-name">!rainingdicks</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="6" onclick="copy(this)"><span class="cmd-name">!ready</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="40" onclick="copy(this)"><span class="cmd-name">!realboy</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!roomfire</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!ruhroh</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="3" onclick="copy(this)"><span class="cmd-name">!ruintobuttstuff</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="24" onclick="copy(this)"><span class="cmd-name">!saltystuff</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="8" onclick="copy(this)"><span class="cmd-name">!scractch</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="0" onclick="copy(this)"><span class="cmd-name">!seeleap</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!serious</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="11" onclick="copy(this)"><span class="cmd-name">!seriousstream</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!sex</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="0" onclick="copy(this)"><span class="cmd-name">!shoesandsocks</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="22" onclick="copy(this)"><span class="cmd-name">!sinners</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!slipup</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!smol</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="7" onclick="copy(this)"><span class="cmd-name">!sohard</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="1" onclick="copy(this)"><span class="cmd-name">!someguyslikeit</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="2" onclick="copy(this)"><span class="cmd-name">!sonofa</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="2" onclick="copy(this)"><span class="cmd-name">!soundswrong</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="21" onclick="copy(this)"><span class="cmd-name">!spanked</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="1" onclick="copy(this)"><span class="cmd-name">!spankharder</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!spankingguy</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="8" onclick="copy(this)"><span class="cmd-name">!spit</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!splooge</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="39" onclick="copy(this)"><span class="cmd-name">!stepbro</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="3" onclick="copy(this)"><span class="cmd-name">!steponme</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="6" onclick="copy(this)"><span class="cmd-name">!stickinthere</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="2" onclick="copy(this)"><span class="cmd-name">!stopfucking</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="5" onclick="copy(this)"><span class="cmd-name">!stopping</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="11" onclick="copy(this)"><span class="cmd-name">!stroke</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="6" onclick="copy(this)"><span class="cmd-name">!stuffupyourbutt</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="10" onclick="copy(this)"><span class="cmd-name">!suckatoe</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="9" onclick="copy(this)"><span class="cmd-name">!sucking</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="2" onclick="copy(this)"><span class="cmd-name">!suckingaction</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="0" onclick="copy(this)"><span class="cmd-name">!suckingass</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="14" onclick="copy(this)"><span class="cmd-name">!suckingtoes</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!suckthemselves</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="0" onclick="copy(this)"><span class="cmd-name">!swipper</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="26" onclick="copy(this)"><span class="cmd-name">!tappp</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="12" onclick="copy(this)"><span class="cmd-name">!thankyou</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="2" onclick="copy(this)"><span class="cmd-name">!thatsgoingtobeagoodone</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!thereshole</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="17" onclick="copy(this)"><span class="cmd-name">!therewillbefeet</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="2" onclick="copy(this)"><span class="cmd-name">!thighs3x</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!thighsyes</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="0" onclick="copy(this)"><span class="cmd-name">!thisisfine</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="1" onclick="copy(this)"><span class="cmd-name">!thoseguys</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="6" onclick="copy(this)"><span class="cmd-name">!toesforme</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="0" onclick="copy(this)"><span class="cmd-name">!toesies</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!toesinthroat</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!toestoday</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!toilet</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="4" onclick="copy(this)"><span class="cmd-name">!tsktsk</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!twink</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="10" onclick="copy(this)"><span class="cmd-name">!uptheass</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="0" onclick="copy(this)"><span class="cmd-name">!uptheass2</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="6" onclick="copy(this)"><span class="cmd-name">!upthebutt</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!vaporeon</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="3" onclick="copy(this)"><span class="cmd-name">!voicesinass</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="4" onclick="copy(this)"><span class="cmd-name">!wantyoutoknow</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="15" onclick="copy(this)"><span class="cmd-name">!washhands</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="52" onclick="copy(this)"><span class="cmd-name">!welcome</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="21" onclick="copy(this)"><span class="cmd-name">!what</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="6" onclick="copy(this)"><span class="cmd-name">!whatstepbro</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="2" onclick="copy(this)"><span class="cmd-name">!whenhour</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!wherehole</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!whipped</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="23" onclick="copy(this)"><span class="cmd-name">!whypoking</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="3" onclick="copy(this)"><span class="cmd-name">!wiehabts</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="19" onclick="copy(this)"><span class="cmd-name">!wife</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="7" onclick="copy(this)"><span class="cmd-name">!wifesbody</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="21" onclick="copy(this)"><span class="cmd-name">!willtherebefeet</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="4" onclick="copy(this)"><span class="cmd-name">!wow</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="10" onclick="copy(this)"><span class="cmd-name">!wtf</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="6" onclick="copy(this)"><span class="cmd-name">!wtfinsta</span></button>
+				<button class="command" data-added="2026-03-16" data-uses="2" onclick="copy(this)"><span class="cmd-name">!wtfnickky</span></button>
+				<button class="command" data-added="2026-03-17" data-uses="1" onclick="copy(this)"><span class="cmd-name">!yaknow</span></button>
+				<button class="command" data-added="2026-03-15" data-uses="2" onclick="copy(this)"><span class="cmd-name">!yesss</span></button>
+				<button class="command" data-added="2026-03-14" data-uses="8" onclick="copy(this)"><span class="cmd-name">!yeti</span></button>
 		</div>
 
 		<footer>
-			Updated 2026-03-17 17:06:09 UTC
+			Updated 2026-03-17 17:51:50 UTC
 		</footer>
 	</div>
 
+	<audio id="previewAudio" preload="none"></audio>
+
 	<script>
-		document.getElementById('search').addEventListener('input', function() {
+		function cmdName(btn) {
+			const span = btn.querySelector('.cmd-name');
+			return span ? span.textContent : btn.textContent;
+		}
+
+		let currentPreviewBtn = null;
+		const previewAudio = document.getElementById('previewAudio');
+
+		previewAudio.addEventListener('ended', function() {
+			if (currentPreviewBtn) {
+				currentPreviewBtn.innerHTML = '&#9654;';
+				currentPreviewBtn.classList.remove('playing');
+				currentPreviewBtn = null;
+			}
+		});
+
+		function preview(btn) {
+			const src = btn.getAttribute('data-src');
+			if (!src) return;
+
+			// If clicking the same button, stop playback
+			if (currentPreviewBtn === btn) {
+				previewAudio.pause();
+				previewAudio.currentTime = 0;
+				btn.innerHTML = '&#9654;';
+				btn.classList.remove('playing');
+				currentPreviewBtn = null;
+				return;
+			}
+
+			// Stop any current playback
+			if (currentPreviewBtn) {
+				previewAudio.pause();
+				currentPreviewBtn.innerHTML = '&#9654;';
+				currentPreviewBtn.classList.remove('playing');
+			}
+
+			currentPreviewBtn = btn;
+			btn.innerHTML = '&#9632;';
+			btn.classList.add('playing');
+			previewAudio.src = src;
+			previewAudio.play().catch(() => {
+				btn.innerHTML = '&#9654;';
+				btn.classList.remove('playing');
+				currentPreviewBtn = null;
+			});
+		}
+
+		const searchInput = document.getElementById('search');
+		const searchClear = document.getElementById('searchClear');
+
+		searchInput.addEventListener('input', function() {
 			const q = this.value.toLowerCase();
 			document.querySelectorAll('.command').forEach(el => {
 				el.classList.toggle('hidden', !el.textContent.toLowerCase().includes(q));
 			});
+			searchClear.style.display = this.value ? 'block' : 'none';
+		});
+
+		searchClear.addEventListener('click', function() {
+			searchInput.value = '';
+			searchInput.dispatchEvent(new Event('input'));
+			searchInput.focus();
 		});
 
 		let chainMode = false;
@@ -610,7 +726,7 @@
 		chainClearBtn.addEventListener('click', clearChain);
 
 		chainCopyBtn.addEventListener('click', function() {
-			const text = chainSelected.map(btn => btn.textContent).join(' ');
+			const text = chainSelected.map(btn => cmdName(btn)).join(' ');
 			navigator.clipboard.writeText(text).then(() => {
 				chainCopyBtn.classList.add('copied');
 				chainCopyBtn.textContent = 'Copied!';
@@ -657,7 +773,7 @@
 				}
 				updateChainCopyBtn();
 			} else {
-				navigator.clipboard.writeText(btn.textContent).then(() => {
+				navigator.clipboard.writeText(cmdName(btn)).then(() => {
 					btn.classList.add('copied');
 					setTimeout(() => btn.classList.remove('copied'), 600);
 				});
