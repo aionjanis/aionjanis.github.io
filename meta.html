@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>AionJanis - Meta Commands</title>
+	<style>
+
+		* { margin: 0; padding: 0; box-sizing: border-box; }
+
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			background: #0e0e10;
+			color: #efeff1;
+			min-height: 100vh;
+			padding: 2rem;
+		}
+
+		.container {
+			max-width: 900px;
+			margin: 0 auto;
+		}
+
+		header {
+			text-align: center;
+			margin-bottom: 2rem;
+		}
+
+		h1 {
+			font-size: 2rem;
+			font-weight: 700;
+			margin-bottom: 0.5rem;
+		}
+
+		.subtitle {
+			color: #adadb8;
+			font-size: 1rem;
+		}
+
+		.count {
+			color: #bf94ff;
+			font-weight: 600;
+		}
+
+		nav {
+			display: flex;
+			justify-content: center;
+			gap: 0.5rem;
+			margin-bottom: 2rem;
+			flex-wrap: wrap;
+		}
+
+		.nav-link {
+			display: inline-block;
+			padding: 0.5rem 1rem;
+			background: #1f1f23;
+			border: 1px solid #303032;
+			border-radius: 6px;
+			color: #adadb8;
+			text-decoration: none;
+			font-size: 0.9rem;
+			transition: border-color 0.15s, background 0.15s;
+		}
+
+		.nav-link:hover {
+			border-color: #bf94ff;
+			background: #26262c;
+			color: #efeff1;
+		}
+
+		.nav-link.active {
+			border-color: #bf94ff;
+			background: #bf94ff22;
+			color: #bf94ff;
+		}
+
+		footer {
+			text-align: center;
+			margin-top: 3rem;
+			color: #53535f;
+			font-size: 0.85rem;
+		}
+
+		.search-wrapper {
+			position: relative;
+			width: 100%;
+			max-width: 400px;
+			margin: 0 auto 1.5rem;
+		}
+
+		.search {
+			display: block;
+			width: 100%;
+			padding: 0.6rem 2.2rem 0.6rem 1rem;
+			background: #1f1f23;
+			border: 1px solid #303032;
+			border-radius: 6px;
+			color: #efeff1;
+			font-size: 1rem;
+			outline: none;
+			box-sizing: border-box;
+		}
+
+		.search:focus {
+			border-color: #bf94ff;
+		}
+
+		.search-clear {
+			position: absolute;
+			right: 0.5rem;
+			top: 50%;
+			transform: translateY(-50%);
+			background: none;
+			border: none;
+			color: #adadb8;
+			font-size: 1.2rem;
+			cursor: pointer;
+			display: none;
+			padding: 0.2rem 0.4rem;
+			line-height: 1;
+		}
+
+		.search-clear:hover {
+			color: #efeff1;
+		}
+
+		.commands {
+			display: grid;
+			grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+			gap: 0.6rem;
+		}
+
+		.command {
+			position: relative;
+			background: #1f1f23;
+			border: 1px solid #303032;
+			border-radius: 6px;
+			padding: 0.7rem 1rem;
+			font-family: 'Consolas', 'Courier New', monospace;
+			font-size: 0.95rem;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 0.3rem;
+			transition: border-color 0.15s, background 0.15s;
+			cursor: pointer;
+			user-select: none;
+			color: #efeff1;
+		}
+
+		.command:hover {
+			border-color: #bf94ff;
+			background: #26262c;
+		}
+
+		.command.copied {
+			border-color: #00c853;
+			background: #1b3a1b;
+		}
+
+		.command.hidden {
+			display: none;
+		}
+
+		.command.new-today {
+			border-color: #f5a623;
+			background: #f5a62318;
+		}
+
+		.command.new-today::before {
+			content: 'NEW';
+			position: absolute;
+			top: -0.4rem;
+			left: -0.4rem;
+			background: #f5a623;
+			color: #0e0e10;
+			font-size: 0.55rem;
+			font-weight: 700;
+			padding: 0.1rem 0.35rem;
+			border-radius: 3px;
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+		}
+
+		.meta-info {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+			font-size: 0.75rem;
+			color: #adadb8;
+		}
+
+		.type-streamer {
+			border-left: 3px solid #bf94ff;
+		}
+
+		.type-tag {
+			border-left: 3px solid #00c8a0;
+		}
+
+		.sort-bar {
+			display: flex;
+			justify-content: center;
+			gap: 0.5rem;
+			margin-bottom: 1rem;
+		}
+
+		.sort-btn {
+			padding: 0.4rem 0.8rem;
+			background: #1f1f23;
+			border: 1px solid #303032;
+			border-radius: 6px;
+			color: #adadb8;
+			font-size: 0.8rem;
+			cursor: pointer;
+			transition: border-color 0.15s, background 0.15s;
+		}
+
+		.sort-btn:hover {
+			border-color: #bf94ff;
+			background: #26262c;
+			color: #efeff1;
+		}
+
+		.sort-btn.active {
+			border-color: #bf94ff;
+			background: #bf94ff22;
+			color: #bf94ff;
+		}
+
+		.filter-bar {
+			display: flex;
+			justify-content: center;
+			gap: 0.5rem;
+			margin-bottom: 1rem;
+		}
+
+		.legend {
+			display: flex;
+			justify-content: center;
+			gap: 1.5rem;
+			margin-bottom: 1.5rem;
+			font-size: 0.85rem;
+			color: #adadb8;
+		}
+
+		.legend-item {
+			display: flex;
+			align-items: center;
+			gap: 0.4rem;
+		}
+
+		.legend-swatch {
+			width: 12px;
+			height: 12px;
+			border-radius: 2px;
+		}
+
+		.legend-swatch.streamer { background: #bf94ff; }
+		.legend-swatch.tag { background: #00c8a0; }
+
+		.command.chain-selected {
+			border-color: #bf94ff;
+			background: #bf94ff22;
+		}
+
+		.command.chain-selected::after {
+			content: attr(data-chain-order);
+			position: absolute;
+			top: -0.4rem;
+			right: -0.4rem;
+			background: #bf94ff;
+			color: #0e0e10;
+			font-size: 0.7rem;
+			font-weight: 700;
+			width: 1.3rem;
+			height: 1.3rem;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+		}
+
+		.chain-bar {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 1rem;
+			margin-bottom: 1rem;
+		}
+
+		.chain-toggle {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			cursor: pointer;
+			font-size: 0.9rem;
+			color: #adadb8;
+			user-select: none;
+		}
+
+		.chain-toggle input {
+			appearance: none;
+			width: 2.4rem;
+			height: 1.3rem;
+			background: #303032;
+			border-radius: 0.65rem;
+			position: relative;
+			cursor: pointer;
+			transition: background 0.2s;
+		}
+
+		.chain-toggle input::after {
+			content: '';
+			position: absolute;
+			top: 0.15rem;
+			left: 0.15rem;
+			width: 1rem;
+			height: 1rem;
+			background: #adadb8;
+			border-radius: 50%;
+			transition: transform 0.2s, background 0.2s;
+		}
+
+		.chain-toggle input:checked {
+			background: #bf94ff44;
+		}
+
+		.chain-toggle input:checked::after {
+			transform: translateX(1.1rem);
+			background: #bf94ff;
+		}
+
+		.chain-copy-btn {
+			display: none;
+			padding: 0.5rem 1.2rem;
+			background: #bf94ff;
+			color: #0e0e10;
+			border: none;
+			border-radius: 6px;
+			font-size: 0.9rem;
+			font-weight: 600;
+			cursor: pointer;
+			transition: opacity 0.15s;
+		}
+
+		.chain-copy-btn:hover {
+			opacity: 0.85;
+		}
+
+		.chain-copy-btn.visible {
+			display: inline-block;
+		}
+
+		.chain-copy-btn.copied {
+			background: #00c853;
+		}
+
+		.chain-clear-btn {
+			background: #303032;
+			color: #efeff1;
+		}
+
+		.chain-clear-btn:hover {
+			background: #53535f;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h1>Meta Commands</h1>
+			<p class="subtitle">Type <span class="count">!vc</span> + a streamer name or tag for a random sound! <span class="count">20</span> meta commands available.</p>
+		</header>
+
+		<nav>
+			<a class="nav-link" href="index.html">Commands</a>
+			<span class="nav-link active">Meta Commands</span>
+			<a class="nav-link" href="stats-yesterday.html">Top Yesterday</a>
+			<a class="nav-link" href="stats-weekly.html">Top This Week</a>
+			<a class="nav-link" href="stats-alltime.html">Top All-Time</a>
+		</nav>
+
+		<div class="legend">
+			<span class="legend-item"><span class="legend-swatch streamer"></span> Streamer</span>
+			<span class="legend-item"><span class="legend-swatch tag"></span> Tag</span>
+		</div>
+
+		<div class="chain-bar">
+			<label class="chain-toggle">
+				<input type="checkbox" id="chainToggle">
+				Chain Copy
+			</label>
+			<button class="chain-copy-btn" id="chainCopyBtn">Copy</button>
+			<button class="chain-copy-btn chain-clear-btn" id="chainClearBtn">Clear</button>
+		</div>
+
+		<div class="search-wrapper">
+			<input type="text" class="search" placeholder="Search meta commands..." id="search">
+			<button class="search-clear" id="searchClear">&times;</button>
+		</div>
+
+		<div class="sort-bar">
+			<button class="sort-btn active" data-sort="name">A-Z</button>
+			<button class="sort-btn" data-sort="count">Most Sounds</button>
+			<button class="sort-btn" data-sort="type">By Type</button>
+		</div>
+
+		<div class="filter-bar">
+			<button class="sort-btn active" data-filter="all">All</button>
+			<button class="sort-btn" data-filter="streamer">Streamers</button>
+			<button class="sort-btn" data-filter="tag">Tags</button>
+		</div>
+
+		<div class="commands" id="commands">
+				<button class="command type-streamer" data-type="streamer" data-count="188" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcaionjanis</span><span class="meta-info">Streamer · 188 sounds</span></button>
+				<button class="command type-streamer" data-type="streamer" data-count="14" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcitsnickky</span><span class="meta-info">Streamer · 14 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="7" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcanimal</span><span class="meta-info">Tag · 7 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="4" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcballs</span><span class="meta-info">Tag · 4 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="5" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcbdo</span><span class="meta-info">Tag · 5 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="4" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcbutt</span><span class="meta-info">Tag · 4 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="9" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vccum</span><span class="meta-info">Tag · 9 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="1" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vccumming</span><span class="meta-info">Tag · 1 sound</span></button>
+				<button class="command type-tag" data-type="tag" data-count="1" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcdeep voice</span><span class="meta-info">Tag · 1 sound</span></button>
+				<button class="command type-tag" data-type="tag" data-count="15" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcexclamation</span><span class="meta-info">Tag · 15 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="16" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcfeet</span><span class="meta-info">Tag · 16 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="3" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcfood</span><span class="meta-info">Tag · 3 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="5" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcgreeting</span><span class="meta-info">Tag · 5 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="12" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vclaugh</span><span class="meta-info">Tag · 12 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="2" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcpee</span><span class="meta-info">Tag · 2 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="14" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcpp</span><span class="meta-info">Tag · 14 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="5" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcquestion</span><span class="meta-info">Tag · 5 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="5" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcreaction</span><span class="meta-info">Tag · 5 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="4" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcrelationship</span><span class="meta-info">Tag · 4 sounds</span></button>
+				<button class="command type-tag" data-type="tag" data-count="1" data-added="2026-03-22" onclick="copy(this)"><span class="cmd-name">!vcthighs</span><span class="meta-info">Tag · 1 sound</span></button>
+		</div>
+
+		<footer>
+			Updated 2026-03-22 18:31:20 UTC
+		</footer>
+	</div>
+
+	<script>
+		function cmdName(btn) {
+			const span = btn.querySelector('.cmd-name');
+			return span ? span.textContent : btn.textContent;
+		}
+
+		let chainMode = false;
+		const chainSelected = [];
+		const MAX_CHAIN = 5;
+		const chainToggle = document.getElementById('chainToggle');
+		const chainCopyBtn = document.getElementById('chainCopyBtn');
+		const chainClearBtn = document.getElementById('chainClearBtn');
+
+		chainToggle.addEventListener('change', function() {
+			chainMode = this.checked;
+			if (!chainMode) clearChain();
+		});
+
+		chainClearBtn.addEventListener('click', clearChain);
+
+		chainCopyBtn.addEventListener('click', function() {
+			const text = chainSelected.map(btn => cmdName(btn)).join(' ');
+			navigator.clipboard.writeText(text).then(() => {
+				chainCopyBtn.classList.add('copied');
+				chainCopyBtn.textContent = 'Copied!';
+				setTimeout(() => { chainCopyBtn.classList.remove('copied'); chainCopyBtn.textContent = 'Copy'; }, 600);
+			});
+		});
+
+		function clearChain() {
+			chainSelected.length = 0;
+			document.querySelectorAll('.command.chain-selected').forEach(el => {
+				el.classList.remove('chain-selected');
+				el.removeAttribute('data-chain-order');
+			});
+			updateChainCopyBtn();
+		}
+
+		function updateChainOrder() {
+			chainSelected.forEach((btn, i) => btn.setAttribute('data-chain-order', i + 1));
+		}
+
+		function updateChainCopyBtn() {
+			const has = chainSelected.length > 0;
+			chainCopyBtn.classList.toggle('visible', has);
+			chainClearBtn.classList.toggle('visible', has);
+		}
+
+		function copy(btn) {
+			if (chainMode) {
+				const idx = chainSelected.indexOf(btn);
+				if (idx !== -1) {
+					chainSelected.splice(idx, 1);
+					btn.classList.remove('chain-selected');
+					btn.removeAttribute('data-chain-order');
+					updateChainOrder();
+				} else if (chainSelected.length < MAX_CHAIN) {
+					chainSelected.push(btn);
+					btn.classList.add('chain-selected');
+					btn.setAttribute('data-chain-order', chainSelected.length);
+				}
+				updateChainCopyBtn();
+			} else {
+				navigator.clipboard.writeText(cmdName(btn)).then(() => {
+					btn.classList.add('copied');
+					setTimeout(() => btn.classList.remove('copied'), 600);
+				});
+			}
+		}
+
+		const searchInput = document.getElementById('search');
+		const searchClear = document.getElementById('searchClear');
+
+		function applyFilters() {
+			const q = searchInput.value.toLowerCase();
+			const activeFilter = document.querySelector('.filter-bar .sort-btn.active')?.dataset.filter || 'all';
+			document.querySelectorAll('.command').forEach(el => {
+				const matchesSearch = !q || el.textContent.toLowerCase().includes(q);
+				const matchesFilter = activeFilter === 'all' || el.dataset.type === activeFilter;
+				el.classList.toggle('hidden', !matchesSearch || !matchesFilter);
+			});
+		}
+
+		searchInput.addEventListener('input', function() {
+			applyFilters();
+			searchClear.style.display = this.value ? 'block' : 'none';
+		});
+
+		searchClear.addEventListener('click', function() {
+			searchInput.value = '';
+			searchInput.dispatchEvent(new Event('input'));
+			searchInput.focus();
+		});
+
+		// Sorting
+		const commandsContainer = document.getElementById('commands');
+		const sortBtns = document.querySelectorAll('.sort-bar .sort-btn');
+		let currentSort = 'name';
+		let sortAsc = true;
+
+		function sortCommands(mode) {
+			if (mode === currentSort) {
+				sortAsc = !sortAsc;
+			} else {
+				currentSort = mode;
+				sortAsc = mode === 'name' || mode === 'type';
+			}
+
+			sortBtns.forEach(b => {
+				const base = {name: 'A-Z', count: 'Most Sounds', type: 'By Type'};
+				if (b.dataset.sort === currentSort) {
+					if (mode === 'name') b.textContent = sortAsc ? 'A-Z' : 'Z-A';
+					else if (mode === 'count') b.textContent = sortAsc ? 'Least Sounds' : 'Most Sounds';
+					else b.textContent = sortAsc ? 'By Type' : 'By Type';
+				} else {
+					b.textContent = base[b.dataset.sort];
+				}
+			});
+
+			const dir = sortAsc ? 1 : -1;
+			const items = [...commandsContainer.querySelectorAll('.command')];
+			items.sort((a, b) => {
+				if (mode === 'count') return dir * ((parseInt(a.dataset.count) || 0) - (parseInt(b.dataset.count) || 0));
+				if (mode === 'type') {
+					const tc = dir * a.dataset.type.localeCompare(b.dataset.type);
+					return tc !== 0 ? tc : cmdName(a).localeCompare(cmdName(b));
+				}
+				return dir * cmdName(a).localeCompare(cmdName(b));
+			});
+			for (const item of items) commandsContainer.appendChild(item);
+		}
+
+		sortBtns.forEach(btn => {
+			btn.addEventListener('click', function() {
+				sortBtns.forEach(b => b.classList.remove('active'));
+				this.classList.add('active');
+				sortCommands(this.dataset.sort);
+			});
+		});
+
+		// Filtering
+		const filterBtns = document.querySelectorAll('.filter-bar .sort-btn');
+		filterBtns.forEach(btn => {
+			btn.addEventListener('click', function() {
+				filterBtns.forEach(b => b.classList.remove('active'));
+				this.classList.add('active');
+				applyFilters();
+			});
+		});
+
+		// Highlight new-today
+		const today = new Date().toISOString().slice(0, 10);
+		document.querySelectorAll('.command').forEach(el => {
+			if (el.dataset.added === today) el.classList.add('new-today');
+		});
+	</script>
+</body>
+</html>
