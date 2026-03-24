@@ -32,6 +32,15 @@
 			margin-bottom: 0.5rem;
 		}
 
+
+		.title-link {
+			color: #bf94ff;
+			text-decoration: none;
+		}
+		.title-link:hover {
+			text-decoration: underline;
+		}
+
 		.subtitle {
 			color: #adadb8;
 			font-size: 1rem;
@@ -146,6 +155,29 @@
 			cursor: pointer;
 			user-select: none;
 			color: #efeff1;
+		}
+
+		.twitch-link {
+			position: absolute;
+			bottom: -0.35rem;
+			right: -0.35rem;
+			width: 1.2rem;
+			height: 1.2rem;
+			background: #9146ff;
+			border-radius: 3px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			color: #fff;
+			text-decoration: none;
+			z-index: 1;
+		}
+		.twitch-link svg {
+			width: 0.7rem;
+			height: 0.7rem;
+		}
+		.twitch-link:hover {
+			background: #772ce8;
 		}
 
 		.command:hover {
@@ -373,7 +405,7 @@
 <body>
 	<div class="container">
 		<header>
-			<h1>Meta Commands</h1>
+			<h1><a href="https://twitch.tv/aionjanis" target="_blank" rel="noopener" class="title-link">AionJanis</a> Meta Commands</h1>
 			<p class="subtitle">Type <span class="count">!vc</span> + a streamer name or tag for a random sound! <span class="count">21</span> meta commands available.</p>
 		</header>
 
@@ -418,8 +450,8 @@
 
 		<div class="commands" id="commands">
 				<button class="command type-streamer" data-type="streamer" data-count="188" data-added="2026-03-24" onclick="copy(this)"><span class="cmd-name">!vcaionjanis</span><span class="meta-info">Streamer · 188 sounds</span></button>
-				<button class="command type-streamer" data-type="streamer" data-count="14" data-added="2026-03-24" onclick="copy(this)"><span class="cmd-name">!vcitsnickky</span><span class="meta-info">Streamer · 14 sounds</span></button>
-				<button class="command type-streamer" data-type="streamer" data-count="1" data-added="2026-03-24" onclick="copy(this)"><span class="cmd-name">!vcinstawolf</span><span class="meta-info">Streamer · 1 sound</span></button>
+				<button class="command type-streamer" data-type="streamer" data-count="14" data-added="2026-03-24" onclick="copy(this)"><span class="cmd-name">!vcitsnickky</span><span class="meta-info">Streamer · 14 sounds</span><a class="twitch-link" href="https://twitch.tv/itsnickky" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="itsnickky on Twitch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg></a></button>
+				<button class="command type-streamer" data-type="streamer" data-count="1" data-added="2026-03-24" onclick="copy(this)"><span class="cmd-name">!vcinstawolf</span><span class="meta-info">Streamer · 1 sound</span><a class="twitch-link" href="https://twitch.tv/instawolf" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="instawolf on Twitch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg></a></button>
 				<button class="command type-tag" data-type="tag" data-count="7" data-added="2026-03-24" onclick="copy(this)"><span class="cmd-name">!vcanimal</span><span class="meta-info">Tag · 7 sounds</span></button>
 				<button class="command type-tag" data-type="tag" data-count="4" data-added="2026-03-24" onclick="copy(this)"><span class="cmd-name">!vcballs</span><span class="meta-info">Tag · 4 sounds</span></button>
 				<button class="command type-tag" data-type="tag" data-count="5" data-added="2026-03-24" onclick="copy(this)"><span class="cmd-name">!vcbdo</span><span class="meta-info">Tag · 5 sounds</span></button>
@@ -441,7 +473,7 @@
 		</div>
 
 		<footer>
-			Updated 2026-03-24 20:22:58 UTC
+			Updated 2026-03-24 20:50:40 UTC
 		</footer>
 	</div>
 
