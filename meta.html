@@ -440,7 +440,7 @@
 		</div>
 
 		<footer>
-			Updated 2026-03-24 17:01:44 UTC
+			Updated 2026-03-24 17:26:26 UTC
 		</footer>
 	</div>
 
@@ -537,6 +537,11 @@
 			searchInput.dispatchEvent(new Event('input'));
 			searchInput.focus();
 		});
+
+		// Sync clear button and filtering with any browser-restored value
+		if (searchInput.value) {
+			searchInput.dispatchEvent(new Event('input'));
+		}
 
 		// Sorting
 		const commandsContainer = document.getElementById('commands');
