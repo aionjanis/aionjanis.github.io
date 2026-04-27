@@ -418,12 +418,6 @@
 			display: block;
 		}
 
-		.chain-preview-label {
-			color: #adadb8;
-			font-size: 0.75rem;
-			margin-bottom: 0.3rem;
-		}
-
 		.chain-preview-cmds {
 			display: flex;
 			align-items: center;
@@ -440,6 +434,13 @@
 			border-radius: 4px;
 			font-size: 0.8rem;
 			font-weight: 500;
+			cursor: pointer;
+			transition: background 0.15s, border-color 0.15s;
+		}
+
+		.chain-preview-cmd:hover {
+			background: #bf94ff44;
+			border-color: #bf94ff;
 		}
 
 		.chain-preview-arrow {
@@ -478,7 +479,6 @@
 		</div>
 
 		<div class="chain-preview" id="chainPreview">
-			<div class="chain-preview-label">Chain preview</div>
 			<div class="chain-preview-cmds" id="chainPreviewCmds"></div>
 		</div>
 
@@ -599,7 +599,7 @@
 		</div>
 
 		<footer>
-			Updated 2026-04-27 17:54:33 UTC
+			Updated 2026-04-27 18:03:10 UTC
 		</footer>
 	</div>
 
@@ -654,9 +654,22 @@
 			chainPreview.classList.toggle('visible', has);
 			chainPreviewCmds.innerHTML = chainSelected.map((btn, i) =>
 				(i > 0 ? '<span class="chain-preview-arrow">▶</span>' : '') +
-				'<span class="chain-preview-cmd">' + cmdName(btn).replace(/</g, '&lt;') + '</span>'
+				'<span class="chain-preview-cmd" data-chain-idx="' + i + '">' + cmdName(btn).replace(/</g, '&lt;') + '</span>'
 			).join('');
 		}
+
+		chainPreviewCmds.addEventListener('click', function(e) {
+			const pill = e.target.closest('.chain-preview-cmd');
+			if (!pill) return;
+			const idx = parseInt(pill.dataset.chainIdx);
+			const btn = chainSelected[idx];
+			if (!btn) return;
+			chainSelected.splice(idx, 1);
+			btn.classList.remove('chain-selected');
+			btn.removeAttribute('data-chain-order');
+			updateChainOrder();
+			updateChainCopyBtn();
+		});
 
 		function copy(btn) {
 			if (chainMode) {
