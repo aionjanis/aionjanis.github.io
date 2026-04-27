@@ -400,6 +400,52 @@
 		.chain-clear-btn:hover {
 			background: #53535f;
 		}
+
+		.chain-preview {
+			display: none;
+			background: #1f1f23;
+			border: 1px solid #303032;
+			border-radius: 8px;
+			padding: 0.5rem 0.8rem;
+			margin-bottom: 1rem;
+			text-align: center;
+			font-size: 0.85rem;
+			color: #efeff1;
+			line-height: 1.6;
+		}
+
+		.chain-preview.visible {
+			display: block;
+		}
+
+		.chain-preview-label {
+			color: #adadb8;
+			font-size: 0.75rem;
+			margin-bottom: 0.3rem;
+		}
+
+		.chain-preview-cmds {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-wrap: wrap;
+			gap: 0.3rem;
+		}
+
+		.chain-preview-cmd {
+			background: #bf94ff22;
+			border: 1px solid #bf94ff66;
+			color: #bf94ff;
+			padding: 0.2rem 0.5rem;
+			border-radius: 4px;
+			font-size: 0.8rem;
+			font-weight: 500;
+		}
+
+		.chain-preview-arrow {
+			color: #53535f;
+			font-size: 0.7rem;
+		}
 	</style>
 </head>
 <body>
@@ -429,6 +475,11 @@
 			</label>
 			<button class="chain-copy-btn" id="chainCopyBtn">Copy</button>
 			<button class="chain-copy-btn chain-clear-btn" id="chainClearBtn">Clear</button>
+		</div>
+
+		<div class="chain-preview" id="chainPreview">
+			<div class="chain-preview-label">Chain preview</div>
+			<div class="chain-preview-cmds" id="chainPreviewCmds"></div>
 		</div>
 
 		<div class="search-wrapper">
@@ -548,7 +599,7 @@
 		</div>
 
 		<footer>
-			Updated 2026-04-27 17:37:52 UTC
+			Updated 2026-04-27 17:54:33 UTC
 		</footer>
 	</div>
 
@@ -564,6 +615,8 @@
 		const chainToggle = document.getElementById('chainToggle');
 		const chainCopyBtn = document.getElementById('chainCopyBtn');
 		const chainClearBtn = document.getElementById('chainClearBtn');
+		const chainPreview = document.getElementById('chainPreview');
+		const chainPreviewCmds = document.getElementById('chainPreviewCmds');
 
 		chainToggle.addEventListener('change', function() {
 			chainMode = this.checked;
@@ -598,6 +651,11 @@
 			const has = chainSelected.length > 0;
 			chainCopyBtn.classList.toggle('visible', has);
 			chainClearBtn.classList.toggle('visible', has);
+			chainPreview.classList.toggle('visible', has);
+			chainPreviewCmds.innerHTML = chainSelected.map((btn, i) =>
+				(i > 0 ? '<span class="chain-preview-arrow">▶</span>' : '') +
+				'<span class="chain-preview-cmd">' + cmdName(btn).replace(/</g, '&lt;') + '</span>'
+			).join('');
 		}
 
 		function copy(btn) {
